@@ -18,3 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('imagens', 'ImagensController@index');
+
+Route::get('cidades', 'CidadesController@index');
+Route::get('cidades/create', 'CidadesController@create');
+Route::post('cidades/store', 'CidadesController@store');
+Route::get('cidades/{id}/destroy', 'CidadesController@destroy');
+Route::get('cidades/{id}/edit', 'CidadesController@edit');
+Route::put('cidades/{id}/update', 'CidadesController@update');
