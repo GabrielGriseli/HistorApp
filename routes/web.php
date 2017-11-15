@@ -21,9 +21,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('imagens', 'ImagensController@index');
 
-Route::get('cidades', 'CidadesController@index');
-Route::get('cidades/create', 'CidadesController@create');
-Route::post('cidades/store', 'CidadesController@store');
-Route::get('cidades/{id}/destroy', 'CidadesController@destroy');
-Route::get('cidades/{id}/edit', 'CidadesController@edit');
-Route::put('cidades/{id}/update', 'CidadesController@update');
+Route::group(['prefix'=>'cidades', 'where'=>['id'=>'[0-9]+']], function(){
+  Route::get('',                  ['as'=>'cidades',             'uses'=>'CidadesController@index']);
+  Route::get('create',            ['as'=>'cidades.create',      'uses'=>'CidadesController@create']);
+  Route::get('{id}/destroy',      ['as'=>'cidades.destroy',     'uses'=>'CidadesController@destroy']);
+  Route::get('{id}/edit',         ['as'=>'cidades.edit',        'uses'=>'CidadesController@edit']);
+  Route::put('{id}/update',       ['as'=>'cidades.update',      'uses'=>'CidadesController@update']);
+  Route::post('store',            ['as'=>'cidades.store',       'uses'=>'CidadesController@store']);
+});

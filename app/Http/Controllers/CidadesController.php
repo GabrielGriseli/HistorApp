@@ -22,12 +22,12 @@ class CidadesController extends Controller
     $nova_cidade = $request->all();
     Cidade::create($nova_cidade);
 
-    return redirect('cidades');
+    return redirect()->route('cidades');
   }
 
   public function destroy($id){
     Cidade::find($id)->delete();
-    return redirect('cidades');
+    return redirect()->route('cidades');
   }
 
   public function edit($id){
@@ -37,6 +37,6 @@ class CidadesController extends Controller
 
   public function update(CidadeRequest $request, $id){
     $habito = Cidade::find($id)->update($request->all());
-    return redirect('cidades');
+    return redirect()->route('cidades');
   }
 }

@@ -4,7 +4,7 @@
   <div class="container">
     <h1>Editando Cidade: {{$cidade->nome}}</h1>
 
-    {!! Form::open(['url' => "cidades/$cidade->id/update", 'method'=>'put']) !!}
+    {!! Form::open(['route' => ["cidades.update", $cidade->id], 'method'=>'put']) !!}
 
     <div class="form-group">
       {!! Form::label('nome', 'Nome') !!}

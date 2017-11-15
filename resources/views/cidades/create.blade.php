@@ -4,7 +4,7 @@
   <div class="container">
     <h1>Nova Cidade</h1>
 
-    {!! Form::open(['url' => 'cidades/store']) !!}
+    {!! Form::open(['route' => 'cidades.store']) !!}
 
     <div class="form-group">
       {!! Form::label('nome', 'Nome') !!}
