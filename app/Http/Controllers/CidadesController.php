@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Cidade;
 use Illuminate\Http\Request;
-use App\Http\Requests\CidadeRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CidadeRequest;
 
 class CidadesController extends Controller
 {
@@ -36,7 +36,7 @@ class CidadesController extends Controller
   }
 
   public function update(CidadeRequest $request, $id){
-    $habito = Cidade::find($id)->update($request->all());
+    $cidade = Cidade::find($id)->update($request->all());
     return redirect()->route('cidades');
   }
 }
