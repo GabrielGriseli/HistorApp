@@ -19,8 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('imagens', 'ImagensController@index');
-
 Route::group(['prefix'=>'cidades', 'where'=>['id'=>'[0-9]+']], function(){
   Route::get('',                  ['as'=>'cidades',             'uses'=>'CidadesController@index']);
   Route::get('create',            ['as'=>'cidades.create',      'uses'=>'CidadesController@create']);
@@ -37,4 +35,14 @@ Route::group(['prefix'=>'pessoas', 'where'=>['id'=>'[0-9]+']], function(){
   Route::get('{id}/edit',         ['as'=>'pessoas.edit',        'uses'=>'PessoasController@edit']);
   Route::put('{id}/update',       ['as'=>'pessoas.update',      'uses'=>'PessoasController@update']);
   Route::post('store',            ['as'=>'pessoas.store',       'uses'=>'PessoasController@store']);
+});
+
+Route::group(['prefix'=>'imagens', 'where'=>['id'=>'[0-9]+']], function(){
+  Route::get('',                    ['as'=>'imagens',                 'uses'=>'ImagensController@index']);
+  Route::get('create',              ['as'=>'imagens.create',          'uses'=>'ImagensController@create']);
+  Route::get('{id}visualizar',      ['as'=>'imagens.visualizar',      'uses'=>'ImagensController@visualizar']);
+  Route::get('{id}/destroy',        ['as'=>'imagens.destroy',         'uses'=>'ImagensController@destroy']);
+  Route::get('{id}/edit',           ['as'=>'imagens.edit',            'uses'=>'ImagensController@edit']);
+  Route::put('{id}/update',         ['as'=>'imagens.update',          'uses'=>'ImagensController@update']);
+  Route::post('store',              ['as'=>'imagens.store',           'uses'=>'ImagensController@store']);
 });
