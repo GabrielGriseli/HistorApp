@@ -26,7 +26,10 @@
       {{ Form::select('id_cidade', \App\Cidade::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control']) }}
     </div>
 
-
+    <div class="form-group">
+      {!! Form::label('id_doador', 'Doador') !!}
+      {{ Form::select('id_doador', \App\Pessoa::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control']) }}
+    </div>
 
     <div class="form-group">
       {!! Form::label('descricao', 'Descrição') !!}
@@ -38,13 +41,14 @@
       {!! Form::textarea('extra_info', null, ['class'=>'form-control']) !!}
     </div>
 
-    <div class="form-group">
-      {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
-    </div>
-
-    {!! Form::label('Produtos:') !!}
+    {!! Form::label('Pessoas na imagem') !!}
     <div class="input_fields_wrap">
         <button class="add_field_button btn btn-default">Adicionar Pessoas</button>
+    </div>
+
+    <div class="form-group">
+      <p></p>
+      {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
     </div>
 
     {!!Form::close() !!}
@@ -55,23 +59,17 @@
 @section('dyn_scripts')
     <script>
         $(document).ready(function() {
-            var max_fields      = 10; //maximum input boxes allowed
             var wrapper         = $(".input_fields_wrap"); //Fields wrapper
             var add_button      = $(".add_field_button"); //Add button ID
-            var x = 1; //initlal text box count
+
             $(add_button).click(function(e){ //on add input button click
                 console.log("clicou");
                 e.preventDefault();
-                if(x < max_fields){ //max input box allowed
-                    x++; //text box increment
-                    $(wrapper).append('<div style="width: 90%; float:left">{!! Form::select('itens[]', \App\Pessoa::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) !!}<a href="#" class="remove_field">Remover</a></div>');
-
-                }
+                $(wrapper).append('<div style="width: 90%; float:left">{!! Form::select('pessoas[]', \App\Pessoa::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) !!}<a href="#" class="remove_field">Remover</a></div>');
             });
             $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
                 e.preventDefault();
                 $(this).parent('div').remove();
-                x--;
             })
         });
     </script>

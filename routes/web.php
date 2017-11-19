@@ -47,7 +47,3 @@ Route::group(['prefix'=>'imagens', 'where'=>['id'=>'[0-9]+']], function(){
   Route::put('{id}/update',         ['as'=>'imagens.update',          'uses'=>'ImagensController@update']);
   Route::post('store',              ['as'=>'imagens.store',           'uses'=>'ImagensController@store']);
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

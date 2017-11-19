@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Imagem;
 use App\Pessoa;
 use App\Imagem_Pessoa;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImagemRequest;
@@ -20,24 +21,30 @@ class ImagensController extends Controller
     $imagem = Imagem::find($id);
     $imagens_pessoas = Imagem_Pessoa::where('id_imagens', $id)->get();
 
-
-
-
     return view('imagens.visualizar', compact('imagem', 'imagens_pessoas'));
   }
 
   public function create(){
-    return view('imagens.create');
+    if (Auth::check()){
+      return view('imagens.create');
+    }
+
+    return view('auth/login');
   }
 
   public function store(ImagemRequest $request){
+
+    $id_user = Auth::user()->id;
+    #injetar artificialmente dados no request. http://laraveldaily.com/how-to-artificially-add-values-to-request-array/
+    $request->request->add(['id_user' => $id_user]);
     $nova_imagem = $request->all();
     $nova_imagem = Imagem::create($nova_imagem);
 
-    $itens = $request->itens;
-    foreach($itens as $key => $value ) {
-        $pessoa_atual =  Pessoa::find($itens[$key]);
-        Imagem_Pessoa::create(['id_imagens'  => $nova_imagem->id,'id_pessoas' => $itens[$key]]);
+    $pessoas = $request->pessoas;
+    if(!empty($pessoas)){
+      foreach($pessoas as $key => $value ) {
+        Imagem_Pessoa::create(['id_imagens'  => $nova_imagem->id,'id_pessoas' => $pessoas[$key]]);
+      }
     }
 
     return redirect()->route('imagens');
