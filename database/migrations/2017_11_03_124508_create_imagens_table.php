@@ -22,7 +22,10 @@ class CreateImagensTable extends Migration
             $table->string('extra_info', 1000);
             $table->integer('id_cidade')->unsigned();
             $table->foreign('id_cidade')->references('id')->on('cidades');
-
+            $table->integer('id_doador')->unsigned();
+            $table->foreign('id_doador')->references('id')->on('pessoas');
+            $table->integer('id_user')->unsigned();
+            $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
         });
     }
