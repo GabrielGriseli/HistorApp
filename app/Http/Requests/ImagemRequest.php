@@ -25,11 +25,7 @@ class ImagemRequest extends FormRequest
     {
         return [
             'nome' =>'required',
-            'link_imagem' =>'required',
-            'dt_entrevista' =>'required',
-            'descricao' =>'required',
-            'extra_info' =>'required',
-            'id_cidade' =>'required',
+            
         ];
     }
 }

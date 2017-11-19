@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Imagem;
+use App\Pessoa;
+use App\Imagem_Pessoa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImagemRequest;
@@ -16,7 +18,12 @@ class ImagensController extends Controller
 
   public function visualizar($id){
     $imagem = Imagem::find($id);
-    return view('imagens.visualizar', compact('imagem'));
+    $imagens_pessoas = Imagem_Pessoa::where('id_imagens', $id)->get();
+
+
+
+
+    return view('imagens.visualizar', compact('imagem', 'imagens_pessoas'));
   }
 
   public function create(){
@@ -25,7 +32,13 @@ class ImagensController extends Controller
 
   public function store(ImagemRequest $request){
     $nova_imagem = $request->all();
-    Imagem::create($nova_imagem);
+    $nova_imagem = Imagem::create($nova_imagem);
+
+    $itens = $request->itens;
+    foreach($itens as $key => $value ) {
+        $pessoa_atual =  Pessoa::find($itens[$key]);
+        Imagem_Pessoa::create(['id_imagens'  => $nova_imagem->id,'id_pessoas' => $itens[$key]]);
+    }
 
     return redirect()->route('imagens');
   }

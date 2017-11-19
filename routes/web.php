@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::group(['prefix'=>'cidades', 'where'=>['id'=>'[0-9]+']], function(){
   Route::get('',                  ['as'=>'cidades',             'uses'=>'CidadesController@index']);
@@ -46,3 +47,7 @@ Route::group(['prefix'=>'imagens', 'where'=>['id'=>'[0-9]+']], function(){
   Route::put('{id}/update',         ['as'=>'imagens.update',          'uses'=>'ImagensController@update']);
   Route::post('store',              ['as'=>'imagens.store',           'uses'=>'ImagensController@store']);
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

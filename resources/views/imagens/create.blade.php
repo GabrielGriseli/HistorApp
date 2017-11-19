@@ -29,30 +29,6 @@
 
 
     <div class="form-group">
-      {!! Form::label('id_pessoa', 'Pessoas') !!}
-      <?php $pessoas = array()?>
-      {{ Form::select('id_pessoa', \App\Pessoa::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control']) }}
-      <table class="table table-striped table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Ação</td>
-          </tr>
-        </thead>
-        <tbody>
-        @foreach($pessoas as $i)
-          <tr>
-            <td>{{$i->nome}}</td>
-          </tr>
-        @endforeach
-        </tbody>
-      </table>
-    </div>
-
-
-
-
-    <div class="form-group">
       {!! Form::label('descricao', 'Descrição') !!}
       {!! Form::textarea('descricao', null, ['class'=>'form-control']) !!}
     </div>
@@ -66,7 +42,37 @@
       {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
     </div>
 
+    {!! Form::label('Produtos:') !!}
+    <div class="input_fields_wrap">
+        <button class="add_field_button btn btn-default">Adicionar Pessoas</button>
+    </div>
+
     {!!Form::close() !!}
 
   </div>
+@endsection
+
+@section('dyn_scripts')
+    <script>
+        $(document).ready(function() {
+            var max_fields      = 10; //maximum input boxes allowed
+            var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+            var add_button      = $(".add_field_button"); //Add button ID
+            var x = 1; //initlal text box count
+            $(add_button).click(function(e){ //on add input button click
+                console.log("clicou");
+                e.preventDefault();
+                if(x < max_fields){ //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div style="width: 90%; float:left">{!! Form::select('itens[]', \App\Pessoa::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) !!}<a href="#" class="remove_field">Remover</a></div>');
+
+                }
+            });
+            $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+                e.preventDefault();
+                $(this).parent('div').remove();
+                x--;
+            })
+        });
+    </script>
 @endsection

@@ -6,43 +6,35 @@
 
     {!! Form::open(['route' => ["imagens.update", $imagem->id], 'method'=>'put']) !!}
 
-    <div class="form-group">
-      {!! Form::label('nome', 'Nome da Imagem') !!}
-      {!! Form::text('nome', $imagem->nome, ['class'=>'form-control']) !!}
-    </div>
 
-    <div class="form-group">
-      {!! Form::label('link_imagem', 'Link da Imagem') !!}
-      {!! Form::text('link_imagem', $imagem->link_imagem, ['class'=>'form-control']) !!}
-    </div>
 
-    <div class="form-group">
-      {!! Form::label('dt_entrevista', 'Data da Entrevista') !!}
-      {!! Form::date('dt_entrevista', '2017-05-18 00:00:00', ['class'=>'form-control']) !!}
-    </div>
+    {!! Form::label('Pessoas:') !!}
+        <div class="input_fields_wrap">
 
-    <div class="form-group">
-      {!! Form::label('id_cidade', 'Cidade') !!}
-      {{ Form::select('id_cidade', \App\Cidade::orderBy('nome')->pluck('nome', 'id')->toArray(), $imagem->id_cidade, ['class'=>'form-control']) }}
-      <p></p>
-      <a href="{{route('cidades.create')}}" class="btn-sm btn-primary">Cadastrar Nova Cidade</a>
-    </div>
-
-    <div class="form-group">
-      {!! Form::label('descricao', 'Descrição') !!}
-      {!! Form::textarea('descricao', $imagem->descricao, ['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-      {!! Form::label('extra_info', 'Demais Informações') !!}
-      {!! Form::textarea('extra_info', $imagem->extra_info, ['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-      {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
-    </div>
+            <button class="add_field_button btn btn-default">Adicionar Outra</button>
+            <hr>
+            <div class="form-group">{!! Form::select('itens[]', \App\Pessoa::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control']) !!}
+                <a href="#" class="remove_field">Remover</a></div>
+        </div>
 
     {!!Form::close() !!}
 
   </div>
+@endsection
+
+@section('dyn_scripts')
+    <script>
+        $(document).ready(function() {
+            var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+            var add_button      = $(".add_field_button"); //Add button ID
+            $(add_button).click(function(e){ //on add input button click
+                console.log("clicou");
+                e.preventDefault();
+                $(wrapper).append('<div class="form-group">{!! Form::select('itens[]', \App\Pessoa::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control']) !!}<a href="#" class="remove_field">Remover</a></div>');
+            });
+            $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove();
+            })
+        });
+    </script>
 @endsection

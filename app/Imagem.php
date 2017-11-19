@@ -9,7 +9,7 @@ class Imagem extends Model
     protected $table = "imagens";
     protected $fillable = ['nome', 'link_imagem', 'dt_entrevista', 'descricao', 'extra_info', 'id_cidade'];
 
-    public function cidade(){
-      return $this->belongsTo('App\Cidade');
+    public function imagem_pessoa(){
+      return $this->HasMany('App\Imagem_Pessoa');
     }
 }
