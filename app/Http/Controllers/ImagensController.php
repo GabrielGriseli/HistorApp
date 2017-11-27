@@ -20,8 +20,10 @@ class ImagensController extends Controller
   public function visualizar($id){
     $imagem = Imagem::find($id);
     $imagens_pessoas = Imagem_Pessoa::where('id_imagens', $id)->get();
+    $pessoa = Pessoa::find($imagem->id_doador);
 
-    return view('imagens.visualizar', compact('imagem', 'imagens_pessoas'));
+    //return view('imagens.visualizar', compact('imagem', 'imagens_pessoas'));
+    return view('imagens.visualizar') -> with(compact('imagem', 'imagens_pessoas', 'pessoa'));
   }
 
   public function create(){
