@@ -2,7 +2,19 @@
 
 @section('content')
   <div class="container">
-    <h1>Imagem</h1>
+    <h1>{{$imagem->nome}}</h1>
+
+    <div class="first-div-inner"><img style='height: 100%; width: 100%; object-fit: contain' src="{!! asset($imagem->link_imagem) !!}"/></div>
+
+    <p>{{$imagem->descricao}}</p>
+
+    
+
+
+
+
+
+
 
     <table class="table table-striped table-bordered table-hover">
       <thead>
@@ -11,9 +23,9 @@
         </tr>
       </thead>
       <tbody>
-      @foreach($imagens_pessoas as $i)
+      @foreach($imagem->pessoas as $pessoa)
         <tr>
-          <td>{{$i->id_pessoas}}</td>
+          <td>{{$pessoa->nome}}</td>
         </tr>
       @endforeach
       </tbody>

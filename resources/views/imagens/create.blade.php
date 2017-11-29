@@ -44,11 +44,8 @@
     {!! Form::label('Pessoas na imagem') !!}
     <div class="input_fields_wrap">
         <button class="add_field_button btn btn-default">Adicionar Pessoas</button>
-    </div>
-
-    <div class="form-group">
-      <p></p>
-      {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
+        {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
+        <p></p>
     </div>
 
     {!!Form::close() !!}

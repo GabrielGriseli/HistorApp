@@ -18,10 +18,16 @@ class ImagensController extends Controller
   }
 
   public function visualizar($id){
-    $imagem = Imagem::find($id);
-    $imagens_pessoas = Imagem_Pessoa::where('id_imagens', $id)->get();
+    $imagem = Imagem::find($id);   ///imagem em questão
+    #$imagens_pessoas = Imagem_Pessoa::where('id_imagens', $id)->get();  ///todas as pessoasque estão na imagem
+    #$pessoas = Pessoa::all();
 
-    return view('imagens.visualizar', compact('imagem', 'imagens_pessoas'));
+    #$filtered = $pessoas->whereIn('id', imagens_pessoas=>id_pessoas);
+
+    #$pessoas = Pessoa::whereHas('id', function ($query) use ($imagens_pessoas) {$query->whereIn('id', $imagens_pessoas->id_pessoas);})->get();
+  #  $intersect = $pessoas->intersect($imagens_pessoas);
+
+    return view('imagens.visualizar', compact('imagem'));
   }
 
   public function create(){
