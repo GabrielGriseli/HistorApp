@@ -24,5 +24,6 @@
       </tbody>
     </table>
     <a href="{{route('cidades.create')}}" class="btn-sm btn-primary">Nova Cidade</a>
+    <a href="/" class="btn-sm btn-primary">Voltar</a>
   </div>
 @endsection

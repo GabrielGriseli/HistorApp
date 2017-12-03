@@ -57,14 +57,32 @@
       </tbody>
       <thead>
         <tr>
-          <th>Pessoa da Foto</th>
+          <th>Doador</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>{{$pessoa->nome}}</td>
+          <td>{{$doador->nome}}
         </tr>
       </tbody>
+
     </table>
+
+
+    <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Pessoas na foto</th>
+      </tr>
+    </thead>
+    <tbody>
+    @foreach($imagem->pessoas as $pessoa)
+      <tr>
+        <td>{{$pessoa->nome}}</td>
+      </tr>
+    @endforeach
+    </tbody>
+    </table>
+
   </div>
 @endsection

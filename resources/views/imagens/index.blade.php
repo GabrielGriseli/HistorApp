@@ -25,5 +25,6 @@
       </tbody>
     </table>
     <a href="{{route('imagens.create')}}" class="btn-sm btn-primary">Cadastrar Nova Imagem</a>
+    <a href="/" class="btn-sm btn-primary">Voltar</a>
   </div>
 @endsection
